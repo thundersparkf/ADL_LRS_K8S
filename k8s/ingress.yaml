@@ -3,8 +3,13 @@ kind: Ingress
 metadata:
   name: ingress-nginx
 spec:
+  tls:
+    - hosts:
+      - adl-lrs.ddns.net
+      secretName: tls-secret
   rules:
-    - http:
+    - host: adl-lrs.ddns.net
+      http:
         paths:
           - path: /
             pathType: Prefix

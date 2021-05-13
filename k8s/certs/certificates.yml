@@ -1,5 +1,5 @@
 apiVersion: cert-manager.io/v1alpha2
-kind: Issuer
+kind: ClusterIssuer
 metadata:
   name: letsencrypt
 spec:
@@ -19,7 +19,7 @@ metadata:
 spec:
   secretName: tls-secret
   issuerRef:
-    kind: Issuer
+    kind: ClusterIssuer
     name: letsencrypt
   commonName: adl-lrs.ddns.net
   dnsNames:
