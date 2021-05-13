@@ -33,5 +33,5 @@ This will install [Cert-Manager](https://cert-manager.io/) in a separate namespa
 
 Once configured, find the certificated.yml file inside the k8s directory and modify the **commonName** and the **dnsNames** to the domain from noip.com. Then run: 
 
-`kubectl apply -f ./k8s/certificates.yml`
+`kubectl apply -f ./k8s/certs/certificates.yml`
 
