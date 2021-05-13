@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: amqp
+  name: amqp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: amqp
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o k8s
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/public: "true"
+        io.kompose.service: amqp
+    spec:
+      containers:
+        - env:
+            - name: RABBITMQ_DEFAULT_PASS
+              value: rabbitmq
+            - name: RABBITMQ_DEFAULT_USER
+              value: rabbitmq
+            - name: RABBITMQ_DEFAULT_VHOST
+              value: /
+            - name: RABBITMQ_ERLANG_COOKIE
+              value: SWQOKODSQALRPCLNMEQG
+          image: rabbitmq:3-management
+          name: docker-rabbit
+          ports:
+            - containerPort: 15672
+            - containerPort: 5672
+          resources: {}
+      hostname: rabbit1
+      restartPolicy: Always
+status: {}
