@@ -33,6 +33,8 @@ spec:
               value: lrs_password
             - name: POSTGRES_USER
               value: lrs_owner
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
           image: postgres
           name: docker-postgres
           ports:

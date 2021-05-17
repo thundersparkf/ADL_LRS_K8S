@@ -24,12 +24,15 @@ spec:
         io.kompose.network/public: "true"
         io.kompose.service: lrs
     spec:
+      initContainers:
+      - name: init-myservice
+        image: busybox:1.28
+        command: ['sh', '-c', 'until nslookup postgres; do echo waiting for postgres; sleep 2; done;']
       containers:
         - image: devagastya0/lrs:latest
           name: docker-lrs
           ports:
             - containerPort: 8000
-          imagePullPolicy: IfNotPresent
           resources: {}
       restartPolicy: Always
 status: {}
