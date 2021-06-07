@@ -3,24 +3,14 @@
 Built upon [adl-lrs-docker](https://github.com/vbhayden/adl-lrs-docker) to implement [adlnet's ADL_LRS](https://github.com/adlnet/ADL_LRS) with a touch of Kubernetes.
 
 
-## To deploy on Kubernetes cluster locally
-Install [minikube](https://minikube.sigs.k8s.io/docs/start/) and start the cluster using 
+## Setup Kubernetes cluster
 
-`minikube start --vm=true`
-
-Next, from the project directory run:
-
-`kubectl create -f ./k8s/`
-
-After that, execute:
-
-`minikube ip`
-
-And paste the output into a web browser.
+Setup a Kubernetes or a K3S cluster in the cloud or on premise.
 
 ## HTTPS Setup
 This application is fully functional only over HTTPS. So head over to [noip.com](noip.com) to obtain a temporary hostname for free. 
-Point the hostname to the IP address obtained from minikube ip in the previous step. 
+
+In the files `ssl_certs.yml` and `nginx-ingress.yml`, replace `<domain>` with your temporary domain. Also replace `<email>` in the `ssl_certs.yml` file.
 
 Then execute 
 
@@ -31,7 +21,13 @@ Then execute
  
 This will install [Cert-Manager](https://cert-manager.io/) in a separate namespace. For more information on how configure Cert-Manager, click [here](https://medium.com/flant-com/cert-manager-lets-encrypt-ssl-certs-for-kubernetes-7642e463bbce)
 
-Once configured, find the certificated.yml file inside the k8s directory and modify the **commonName** and the **dnsNames** to the domain from noip.com. Then run: 
+## Deployment
 
-`kubectl apply -f ./k8s/certs/certificates.yml`
+After setting up a kubernetes cluster and HTTPS support
+
+From the project directory run:
+
+`kubectl create -f ./k8s/`
+
+
 
